@@ -1,0 +1,27 @@
+<h1><%= @gallery.name %></h1>
+<h3><%= @gallery.description %></h3>
+<div>
+  <%= form_for(@image) do |f| %>
+  
+  <%= hidden_field_tag :gallery_id, @gallery.id %>
+  
+  <%= hidden_field_tag :id, @gallery.id %>
+  
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+  
+  <%= f.label :url %>
+  <%= f.text_field :url, class: 'form-control' %>
+  
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<div>
+  <ul>
+    <% @gallery.images.each do |image| %>
+    <li>
+      <%= image_tag image.url %>
+    </li>
+    <% end %>
+  </ul>
+</div>
