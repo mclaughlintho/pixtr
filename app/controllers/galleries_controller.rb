@@ -9,11 +9,11 @@ class GalleriesController < ApplicationController
   end
   
   def create
-    @gallery = Gallery.new(user_params)
+    @gallery = Gallery.new(gallery_params)
     if @gallery.save
       redirect_to @gallery
     else
-      render 'galleries/new'
+      render 'new'
     end
   end
   
@@ -22,9 +22,27 @@ class GalleriesController < ApplicationController
     @image = @gallery.images.new
   end
   
+  def destroy
+    @gallery = Gallery.find(params[:id])
+    @gallery.destroy
+    if @gallery.destroy
+      redirect_to root_url
+    end
+  end
+  
+  def edit
+    @gallery = Gallery.find(params[:id])
+  end
+  
+  def update
+    @gallery = Gallery.find(params[:id])
+    @gallery.update_attributes(gallery_params)
+    redirect_to @gallery
+  end
+  
   private
   
-  def user_params
+  def gallery_params
     params.require(:gallery).permit(:name, :description)
   end
   
