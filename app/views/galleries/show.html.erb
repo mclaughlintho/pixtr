@@ -2,25 +2,13 @@
 <h3><%= @gallery.description %></h3>
 <p><%= link_to 'Update Gallery seetings', edit_gallery_path(@gallery) %></p>
 <div>
-  <%= form_for([@gallery, @image]) do |f| %>
-  
-    <%= hidden_field_tag :gallery_id, @gallery.id %>
-  
-    <%= hidden_field_tag :id, @gallery.id %>
-  
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control' %>
-  
-    <%= f.label :url %>
-    <%= f.text_field :url, class: 'form-control' %>
-  
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
-  <% end %>
+  <%= render 'fields' %>
 </div>
 <div>
   <ul>
     <% @gallery.images.each do |image| %>
     <li>
+      <%= link_to image.title, [@gallery, image] %>
       <%= image_tag image.url %>
       <%= link_to 'Delete image', [@gallery, image], method: :delete %>
     </li>

@@ -17,10 +17,24 @@ class ImagesController < ApplicationController
     end
   end
   
+  def edit
+    @image = Image.find(params[:id])
+    @gallery = Gallery.find(params[:gallery_id])
+  end
+  
+  def index
+    @images = Image.all
+  end
+  
+  def show
+    @image = Image.find(params[:id])
+    @gallery = Gallery.find(params[:gallery_id])
+  end
+  
   private
   
   def image_params
-    params.require(:image).permit(:title, :url, :gallery_id)
+    params.require(:image).permit(:title, :url)
   end
   
 end

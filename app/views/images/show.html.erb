@@ -1,0 +1,5 @@
+<h1><%= @image.title %></h1>
+<h3><%= link_to "Return to Gallery", @gallery %></h3>
+<div>
+  <%= image_tag @image.url %> <%= link_to "Edit photo", edit_gallery_image_path(@gallery, @image) %>
+</div>

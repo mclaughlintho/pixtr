@@ -1,14 +1,5 @@
 <h1>Create a New Gallery!</h1>
 
 <div class="row">
-  <%= form_for(@gallery) do |f| %>
-  
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
-  
-    <%= f.label :description %>
-    <%= f.text_field :description, class: 'form-control' %>
-  
-    <%= f.submit 'Submit', class: "btn btn-primary" %>
-  <% end %>
+  <%= render 'fields' %>
 </div>
