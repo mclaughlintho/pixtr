@@ -2,7 +2,7 @@
 <h3><%= @gallery.description %></h3>
 <p><%= link_to 'Update Gallery seetings', edit_gallery_path(@gallery) %></p>
 <div>
-  <%= form_for(@image) do |f| %>
+  <%= form_for([@gallery, @image]) do |f| %>
   
     <%= hidden_field_tag :gallery_id, @gallery.id %>
   
@@ -22,7 +22,7 @@
     <% @gallery.images.each do |image| %>
     <li>
       <%= image_tag image.url %>
-      <%= link_to 'Delete image', image, method: :delete %>
+      <%= link_to 'Delete image', [@gallery, image], method: :delete %>
     </li>
     <% end %>
   </ul>
