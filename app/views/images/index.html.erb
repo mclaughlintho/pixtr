@@ -1,9 +1,10 @@
 <h1>All Images</h1>
+<p>Return to <%= link_to 'Galleries Index', root_url %></p>
 <div>
   <ul>
     <% @images.each do |image| %>
     <li>
-      <%= image_tag image.url %> Go to this photos <%= link_to 'Gallery', gallery_path(image.gallery) %>
+      <%= image_tag image.url %> Go to this photos <%= link_to 'Gallery', image.gallery %>
     </li>
     <% end %>
   </ul>
