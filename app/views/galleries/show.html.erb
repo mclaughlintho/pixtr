@@ -9,7 +9,7 @@
     <% @gallery.images.all.each do |image| %>
     <li>
       <%= link_to image.title, [@gallery, image] %>
-      <%= image_tag image.url %>
+      <%= link_to image_tag(image.url), [@gallery, image] %>
       <%= link_to 'Delete image', [@gallery, image], method: :delete %>
     </li>
     <% end %>

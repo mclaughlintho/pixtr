@@ -24,6 +24,13 @@ class ImagesController < ApplicationController
     @tags = Tag.all
   end
   
+  def update
+    @gallery = Gallery.find(params[:gallery_id])
+    @image = Image.find(params[:id])
+    @image.update_attributes(image_params)
+    redirect_to [@gallery, @image]
+  end
+  
   def index
     @images = Image.all
   end
