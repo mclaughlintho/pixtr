@@ -20,6 +20,7 @@ class GalleriesController < ApplicationController
   def show
     @gallery = Gallery.find(params[:id])
     @image = @gallery.images.new
+    @tags = Tag.all
   end
   
   def destroy

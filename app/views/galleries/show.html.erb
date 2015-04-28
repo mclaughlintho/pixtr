@@ -6,7 +6,7 @@
 </div>
 <div>
   <ul>
-    <% @gallery.images.each do |image| %>
+    <% @gallery.images.all.each do |image| %>
     <li>
       <%= link_to image.title, [@gallery, image] %>
       <%= image_tag image.url %>
