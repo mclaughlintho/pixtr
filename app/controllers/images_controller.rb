@@ -3,6 +3,7 @@ class ImagesController < ApplicationController
   def create
     @gallery = Gallery.find(params[:gallery_id])
     @image = @gallery.images.new(image_params)
+    @tags = Tag.all
     if @image.save
       redirect_to @gallery
     end
@@ -20,6 +21,14 @@ class ImagesController < ApplicationController
   def edit
     @image = Image.find(params[:id])
     @gallery = Gallery.find(params[:gallery_id])
+    @tags = Tag.all
+  end
+  
+  def update
+    gallery = Gallery.find(params[:gallery_id])
+    image = Image.find(params[:id])
+    image.update_attributes(image_params)
+    redirect_to [gallery, image]
   end
   
   def index
@@ -34,7 +43,7 @@ class ImagesController < ApplicationController
   private
   
   def image_params
-    params.require(:image).permit(:title, :url)
+    params.require(:image).permit(:title, :url, tag_ids: [])
   end
   
 end

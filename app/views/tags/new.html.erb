@@ -1,0 +1,12 @@
+<h1>New Tag</h1>
+
+  <div>
+    <%= form_for(@tag) do |f| %>
+
+    <%= f.label :text %>
+    <%= f.text_field :text, class: 'form-control' %>
+
+    <%= f.submit "Submit", class: 'btn btn-primary' %>
+
+    <% end %>
+  </div>

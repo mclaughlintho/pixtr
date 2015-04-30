@@ -5,6 +5,9 @@
   
     <%= f.label :url %>
     <%= f.text_field :url, class: 'form-control' %>
-  
+    
+    <h2>Tags:</h2>
+    <%= f.collection_check_boxes :tag_ids, @tags, :id, :text %>
+    
     <%= f.submit 'Submit', class: 'btn btn-primary' %>
   <% end %>

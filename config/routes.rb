@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   resources :images, only: [:index]
   
   resources :galleries do
-    resources :images, only: [:create, :destroy, :show, :edit]
+    resources :images, only: [:create, :destroy, :show, :edit, :update]
   end
+  
+  resources :tags
   
   resources :users
   # You can have the root of your site routed with "root"
