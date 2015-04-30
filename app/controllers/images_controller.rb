@@ -25,10 +25,10 @@ class ImagesController < ApplicationController
   end
   
   def update
-    @gallery = Gallery.find(params[:gallery_id])
-    @image = Image.find(params[:id])
-    @image.update_attributes(image_params)
-    redirect_to [@gallery, @image]
+    gallery = Gallery.find(params[:gallery_id])
+    image = Image.find(params[:id])
+    image.update_attributes(image_params)
+    redirect_to [gallery, image]
   end
   
   def index
