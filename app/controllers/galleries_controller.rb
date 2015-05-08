@@ -1,4 +1,5 @@
 class GalleriesController < ApplicationController
+  before_action :require_login, only: [:new, :create, :destroy, :edit, :update]
   
   def index
     @galleries = Gallery.all
@@ -9,7 +10,7 @@ class GalleriesController < ApplicationController
   end
   
   def create
-    @gallery = Gallery.create(gallery_params)
+    @gallery = current_user.galleries.create(gallery_params)
     redirect_to @gallery
   end
   

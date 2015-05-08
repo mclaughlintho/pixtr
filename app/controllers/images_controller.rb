@@ -1,12 +1,11 @@
 class ImagesController < ApplicationController
+  before_action :require_login, only: [:create, :new, :edit, :update, :destroy]
   
   def create
     @gallery = Gallery.find(params[:gallery_id])
-    @image = @gallery.images.new(image_params)
+    @image = @gallery.images.create(image_params)
     @tags = Tag.all
-    if @image.save
       redirect_to @gallery
-    end
   end
   
   def destroy
@@ -43,7 +42,7 @@ class ImagesController < ApplicationController
   private
   
   def image_params
-    params.require(:image).permit(:title, :url, tag_ids: [])
+    params.require(:image).permit(:title, :url, tag_ids: []).merge(user_id: current_user.id)
   end
   
 end
