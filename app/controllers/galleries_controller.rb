@@ -16,6 +16,7 @@ class GalleriesController < ApplicationController
   
   def show
     @gallery = Gallery.find(params[:id])
+    @user = @gallery.user
     @image = @gallery.images.new
     @tags = Tag.all
   end
