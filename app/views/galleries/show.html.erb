@@ -1,6 +1,6 @@
 <h1><%= @gallery.name %></h1>
 <h3><%= @gallery.description %></h3>
-<h2><%= link_to @user.email, @user %></h2>
+<h2><%= link_to @user.username, @user %></h2>
 <p><%= link_to 'Update Gallery seetings', edit_gallery_path(@gallery) %></p>
 <div>
   <%= render 'images/fields' %>

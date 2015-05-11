@@ -12,7 +12,7 @@
         <% @galleries.each do |gallery| %>
         <li>
             <%= link_to gallery.name, gallery_path(gallery.id) %> - 
-            <%= link_to gallery.user[:email], gallery.user %>
+            <%= link_to gallery.user.username, gallery.user %>
             (<%= link_to 'delete', gallery, method: :delete %>)
         </li>
         <% end %>
