@@ -3,3 +3,11 @@
 <div>
   <%= image_tag @image.url %> <%= link_to "Edit photo", edit_gallery_image_path(@gallery, @image) %>
 </div>
+<h3>Tags:</h3>
+<ul>
+  <% @image.tags.each do |tag| %>
+  <li>
+    <%= link_to tag.text, tag %>
+  </li>
+  <% end %>
+</ul>

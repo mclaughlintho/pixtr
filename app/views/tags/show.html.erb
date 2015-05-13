@@ -1,6 +1,6 @@
 <h1><%= @tag.text %></h1>
 <p>Back to <%= link_to 'All Tags', tags_path %></p>
-<p>All images tagged with <%= @tag.text %>:</p>
+<h2>All images tagged with <%= @tag.text %>:</h2>
 <div>
   <ul>
   <% @images.each do |image| %>

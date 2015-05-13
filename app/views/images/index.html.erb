@@ -4,8 +4,16 @@
   <ul>
     <% @images.each do |image| %>
     <li>
-      <%= image_tag image.url %> Go to this photos <%= link_to 'Gallery', image.gallery %>
+      <%= link_to image_tag(image.url), [image.gallery, image] %> Go to this photos <%= link_to 'Gallery', image.gallery %>
     </li>
+    <h3>Tags:</h3>
+    <ul>
+      <% image.tags.each do |tag| %>
+      <li>
+        <%= link_to tag.text, tag %>
+      </li>
+      <% end %>
+    </ul>
     <% end %>
   </ul>
 </div>
