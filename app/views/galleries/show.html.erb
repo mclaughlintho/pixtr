@@ -14,6 +14,7 @@
       <%= link_to image_tag(image.url), [@gallery, image] %>
       <%= link_to 'Delete image', [@gallery, image], method: :delete %>
     </li>
+    <h3><%= link_to pluralize(image.comments.count, "Comment"), [@gallery, image] %></h3>
     <h3>Tags:</h3>
     <ul>
       <% image.tags.each do |tag| %>

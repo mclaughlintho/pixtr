@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :require_login, only: [:create, :new, :edit, :update, :destroy]
+  before_action :require_login, only: [:create, :edit, :update, :destroy]
   
   def create
     @gallery = Gallery.find(params[:gallery_id])
@@ -37,6 +37,8 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @gallery = Gallery.find(params[:gallery_id])
+    @comment = Comment.new
+    @comments = @image.comments
   end
   
   private

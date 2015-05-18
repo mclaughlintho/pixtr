@@ -24,9 +24,7 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery = Gallery.find(params[:id])
     @gallery.destroy
-    if @gallery.destroy
-      redirect_to root_url
-    end
+    redirect_to root_url
   end
   
   def edit

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   resources :tags
   
+  resources :comments, only: [:create, :destroy]
+  
   resources :users, only: [:index, :show, :edit, :update, :destroy, :create]
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

@@ -7,6 +7,7 @@
     <li>
       <%= link_to image_tag(image.url), gallery_image_path(image.gallery, image) %>
     </li>
+    <h3><%= link_to pluralize(image.comments.count, "Comment"), [image.gallery, image] %></h3>
   <% end %>
   </ul>
 </div>
