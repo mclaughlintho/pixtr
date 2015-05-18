@@ -17,14 +17,14 @@
 <% if @image.comments.any? %>
 <div>
   <h3>Comments:</h3>
-  <ul>
+  <ol>
     <% @comments.each do |comment| %>
     <li>
       <%= link_to comment.user.username, comment.user %>: "
       <%= comment.text %>" 
-      <p>Posted <%= time_ago_in_words(comment.created_at) %> ago. <%= link_to "delete", comment, method: :delete %></p>
+      <p>Posted <%= time_ago_in_words(comment.created_at) %> ago. <%= link_to "delete", [comment.image, comment], method: :delete %></p>
     </li>
     <% end %>
-  </ul>
+  </ol>
 </div>
 <% end %>
