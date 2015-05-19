@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :images, only: [:index] do
     resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
   
   resources :galleries do

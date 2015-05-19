@@ -1,7 +1,17 @@
 <h1><%= @image.title %></h1>
+<div>
+  <% if @image.likes.include?(user_id: current_user.id) %>
+    <%= link_to "UNLIKE", [@image, @image.likes.find_by(user_id: current_user.id)], method: :delete, class:'btn btn-primary' %>
+  <% else %>
+    <%= render 'likes/form' %>
+  <% end %>
+</div>
 <h3><%= link_to "Return to Gallery", @gallery %></h3>
 <div>
   <%= image_tag @image.url %> <%= link_to "Edit photo", edit_gallery_image_path(@gallery, @image) %>
+</div>
+<div>
+  <%= render 'likes/form' %>
 </div>
 <h3>Tags:</h3>
 <ul>

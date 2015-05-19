@@ -39,6 +39,7 @@ class ImagesController < ApplicationController
     @gallery = Gallery.find(params[:gallery_id])
     @comment = Comment.new
     @comments = @image.comments
+    @like = Like.new
   end
   
   private
