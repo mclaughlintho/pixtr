@@ -2,17 +2,15 @@ class LikesController < ApplicationController
   before_action :require_login
   
   def create
-    @user = current_user
     @image = Image.find(params[:image_id])
-    @like = @image.likes.create
-    redirect_to [@image.gallery, @image]
+    @like = @image.likes.create(user: current_user)
+    redirect_to :back
   end
 
   def destroy
     @like = Like.find(params[:id])
-    @image = @like.image
     @like.destroy
-    redirect_to [@image.gallery, @image]
+    redirect_to :back
   end
   
 end

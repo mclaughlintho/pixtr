@@ -8,6 +8,7 @@
       <%= link_to image_tag(image.url), gallery_image_path(image.gallery, image) %>
     </li>
     <h3><%= link_to pluralize(image.comments.count, "Comment"), [image.gallery, image] %></h3>
+    <h3><%= link_to pluralize(image.liking_users.count, "Like"), [image.gallery, image] %></h3>
   <% end %>
   </ul>
 </div>

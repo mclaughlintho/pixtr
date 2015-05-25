@@ -1,7 +1,5 @@
 <%= form_for([@image, @like]) do |f| %>
 
-<%= hidden_field_tag :user_id, current_user.id %>
-
 <%= hidden_field_tag :image_id, @image.id %>
 
 <%= f.submit "LIKE", class: 'btn btn-primary' %>

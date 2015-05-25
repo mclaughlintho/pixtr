@@ -6,8 +6,7 @@ include Clearance::User
   has_many :comments, dependent: :destroy
   
   has_many :likes, dependent: :destroy
-  has_many :liked_images, class_name: "Likes",
-                          foreign_key: "user_id"
+  has_many :liked_images, through: :likes, source: :image
   
   validates :email, presence: true
   validates :username, presence: true

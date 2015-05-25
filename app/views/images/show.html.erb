@@ -1,18 +1,27 @@
 <h1><%= @image.title %></h1>
 <div>
-  <% if @image.likes.include?(user_id: current_user.id) %>
-    <%= link_to "UNLIKE", [@image, @image.likes.find_by(user_id: current_user.id)], method: :delete, class:'btn btn-primary' %>
-  <% else %>
-    <%= render 'likes/form' %>
-  <% end %>
+  <%= render 'likes/like_form' %>
 </div>
 <h3><%= link_to "Return to Gallery", @gallery %></h3>
 <div>
   <%= image_tag @image.url %> <%= link_to "Edit photo", edit_gallery_image_path(@gallery, @image) %>
 </div>
 <div>
-  <%= render 'likes/form' %>
+  <%= render 'likes/like_form' %>
 </div>
+
+<% if @image.liking_users.any? %>
+<div>
+  <h3>
+    <%= pluralize(@image.liking_users.count, "Like") %>:
+      <% @image.liking_users.each do |liking_user| %>
+      <%= link_to liking_user.username, liking_user %> 
+      <% end %>
+  </h3>
+</div>
+<% end %>
+
+<% if @image.tags.any? %>
 <h3>Tags:</h3>
 <ul>
   <% @image.tags.each do |tag| %>
@@ -21,9 +30,12 @@
   </li>
   <% end %>
 </ul>
+<% end %>
+
 <div>
   <%= render 'comments/form' %>
 </div>
+
 <% if @image.comments.any? %>
 <div>
   <h3>Comments:</h3>

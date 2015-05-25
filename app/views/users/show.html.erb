@@ -1,6 +1,4 @@
 <h1><%= @user.username %></h1> 
-<p><%= link_to "delete", user_path(@user), method: :delete %></p>
-<p><%= link_to "Update user settings", edit_user_path(@user) %></p>
 <p>Create a new Gallery:</p>
 <div>
   <%= render 'galleries/fields' %>
@@ -13,6 +11,14 @@
       <%= link_to gallery.name, gallery %> - 
       <%= gallery.description %>
     </li>
+    <% end %>
+  </ul>
+</div>
+<div>
+  <h2><%= @user.username %>'s Liked Images:</h2>
+  <ul>
+    <% @user.liked_images.each do |liked_image| %>
+    <li><%= link_to image_tag(liked_image.url), [liked_image.gallery, liked_image] %></li>
     <% end %>
   </ul>
 </div>
