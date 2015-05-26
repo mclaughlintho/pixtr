@@ -1,14 +1,20 @@
 <h1><%= @tag.text %></h1>
 <p>Back to <%= link_to 'All Tags', tags_path %></p>
-<h2>All images tagged with <%= @tag.text %>:</h2>
+<% if @tag.images.any? %>
+  <h2>All images tagged with '<%= @tag.text %>':</h2>
+<% else %>
+  <h2>No images tagged with '<%= @tag.text %>'</h2>
+<% end %>
 <div>
   <ul>
   <% @images.each do |image| %>
+  <% unless image.gallery.private? && image.user != current_user %>
     <li>
       <%= link_to image_tag(image.url), gallery_image_path(image.gallery, image) %>
     </li>
     <h3><%= link_to pluralize(image.comments.count, "Comment"), [image.gallery, image] %></h3>
     <h3><%= link_to pluralize(image.liking_users.count, "Like"), [image.gallery, image] %></h3>
+  <% end %>
   <% end %>
   </ul>
 </div>

@@ -1,5 +1,7 @@
 class GalleriesController < ApplicationController
   before_action :require_login, only: [:new, :create, :destroy, :edit, :update]
+  before_action :correct_user, only: [:destroy, :edit, :update]
+  before_action :private_gallery, only: [:show]
   
   def index
     @galleries = Gallery.all
@@ -40,7 +42,25 @@ class GalleriesController < ApplicationController
   private
   
   def gallery_params
-    params.require(:gallery).permit(:name, :description)
+    params.require(:gallery).permit(:name, :description, :private)
+  end
+  
+  def correct_user
+    @gallery = Gallery.find(params[:id])
+    if @gallery.user != current_user
+      redirect_to root_url
+    end
+  end
+  
+  def private_gallery
+    @gallery = Gallery.find(params[:id])
+    if @gallery.private?
+      if @gallery.user == current_user
+        @gallery
+      else
+        redirect_to root_url
+      end
+    end
   end
   
 end

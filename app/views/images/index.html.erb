@@ -3,6 +3,7 @@
 <div>
   <ul>
     <% @images.each do |image| %>
+    <% unless image.gallery.private? && image.user != current_user %>
     <li>
       <%= link_to image_tag(image.url), [image.gallery, image] %> Go to this photos <%= link_to 'Gallery', image.gallery %>
     </li>
@@ -23,6 +24,7 @@
       </li>
       <% end %>
     </ul>
+    <% end %>
     <% end %>
     <% end %>
   </ul>

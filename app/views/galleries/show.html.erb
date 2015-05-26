@@ -1,3 +1,7 @@
+<% if @gallery.private? %>
+<h1>PRIVATE</h1>
+<% end %>
+
 <h1><%= @gallery.name %></h1>
 <h3><%= @gallery.description %></h3>
 <h2><%= link_to @user.username, @user %></h2>

@@ -1,5 +1,7 @@
 class ImagesController < ApplicationController
   before_action :require_login, only: [:create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:destroy, :edit, :update]
+  before_action :private_gallery, only: [:show]
   
   def create
     @gallery = Gallery.find(params[:gallery_id])
@@ -46,6 +48,24 @@ class ImagesController < ApplicationController
   
   def image_params
     params.require(:image).permit(:title, :url, tag_ids: []).merge(user_id: current_user.id)
+  end
+  
+  def correct_user
+    @image = Image.find(params[:id])
+    if @image.user != current_user
+      redirect_to root_url
+    end
+  end
+  
+  def private_gallery
+    @image = Image.find(params[:id])
+    if @image.gallery.private?
+      if @image.user == current_user
+        @image
+      else
+        redirect_to root_url
+      end
+    end
   end
   
 end
