@@ -23,7 +23,6 @@ class CommentsController < ApplicationController
   
   def correct_user
     @comment = Comment.find(params[:id])
-    @image = @comment.image
     if @comment.user != current_user
       redirect_to root_url
     end
