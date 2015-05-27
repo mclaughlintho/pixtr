@@ -1,5 +1,52 @@
 <h1><%= @image.title %></h1>
+<div>
+  <%= render 'likes/like_form' %>
+</div>
 <h3><%= link_to "Return to Gallery", @gallery %></h3>
 <div>
   <%= image_tag @image.url %> <%= link_to "Edit photo", edit_gallery_image_path(@gallery, @image) %>
 </div>
+<div>
+  <%= render 'likes/like_form' %>
+</div>
+
+<% if @image.liking_users.any? %>
+<div>
+  <h3>
+    <%= pluralize(@image.liking_users.count, "Like") %>:
+      <% @image.liking_users.each do |liking_user| %>
+      <%= link_to liking_user.username, liking_user %> 
+      <% end %>
+  </h3>
+</div>
+<% end %>
+
+<% if @image.tags.any? %>
+<h3>Tags:</h3>
+<ul>
+  <% @image.tags.each do |tag| %>
+  <li>
+    <%= link_to tag.text, tag %>
+  </li>
+  <% end %>
+</ul>
+<% end %>
+
+<div>
+  <%= render 'comments/form' %>
+</div>
+
+<% if @image.comments.any? %>
+<div>
+  <h3>Comments:</h3>
+  <ol>
+    <% @comments.each do |comment| %>
+    <li>
+      <%= link_to comment.user.username, comment.user %>: "
+      <%= comment.text %>" 
+      <p>Posted <%= time_ago_in_words(comment.created_at) %> ago. <%= link_to "delete", [comment.image, comment], method: :delete %></p>
+    </li>
+    <% end %>
+  </ol>
+</div>
+<% end %>

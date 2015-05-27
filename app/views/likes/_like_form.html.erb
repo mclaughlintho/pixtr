@@ -1,0 +1,5 @@
+  <% if @image.liking_users.include?(current_user) %>
+    <%= render 'likes/unlike' %>
+  <% else %>
+    <%= render 'likes/like' %>
+  <% end %>

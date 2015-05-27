@@ -1,0 +1,7 @@
+<%= form_for([@image, @image.likes.find_by(user_id: current_user.id)], method: :delete) do |f| %>
+
+<%= hidden_field_tag :image_id, @image.id %>
+
+<%= f.submit "UNLIKE", class:'btn btn-primary' %>
+
+<% end %>

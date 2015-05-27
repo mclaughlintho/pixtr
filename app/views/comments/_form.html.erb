@@ -1,0 +1,7 @@
+<%= form_for([@image, @comment]) do |f| %>
+
+<%= f.text_area :text, placeholder: "Write your comment here", class: "form-control" %>
+
+<%= f.submit "Submit", class: "btn btn-primary" %>
+
+<% end %>

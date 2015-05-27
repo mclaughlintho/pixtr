@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:destroy, :edit, :update]
+  before_action :correct_user, only: [:destroy, :edit, :update]
   
   def show
     @user = User.find(params[:id])
@@ -38,7 +39,14 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:username, :email, :password)
+  end
+  
+  def correct_user
+    user = User.find(params[:id])
+    if user != current_user
+      redirect_to root_url
+    end
   end
 
 end

@@ -1,5 +1,7 @@
 class GalleriesController < ApplicationController
   before_action :require_login, only: [:new, :create, :destroy, :edit, :update]
+  before_action :require_owner, only: [:destroy, :edit, :update]
+  before_action :user_can_view_gallery, only: [:show]
   
   def index
     @galleries = Gallery.all
@@ -16,6 +18,7 @@ class GalleriesController < ApplicationController
   
   def show
     @gallery = Gallery.find(params[:id])
+    @user = @gallery.user
     @image = @gallery.images.new
     @tags = Tag.all
   end
@@ -23,9 +26,7 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery = Gallery.find(params[:id])
     @gallery.destroy
-    if @gallery.destroy
-      redirect_to root_url
-    end
+    redirect_to root_url
   end
   
   def edit
@@ -41,7 +42,21 @@ class GalleriesController < ApplicationController
   private
   
   def gallery_params
-    params.require(:gallery).permit(:name, :description)
+    params.require(:gallery).permit(:name, :description, :private)
+  end
+  
+  def require_owner
+    gallery = Gallery.find(params[:id])
+    if gallery.user != current_user
+      redirect_to root_url
+    end
+  end
+  
+  def user_can_view_gallery
+    gallery = Gallery.find(params[:id])
+    if gallery.private? && gallery.user != current_user
+        redirect_to root_url
+    end
   end
   
 end

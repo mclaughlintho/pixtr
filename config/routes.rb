@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   root 'galleries#index'
   
-  resources :images, only: [:index]
+  resources :images, only: [:index] do
+    resources :comments, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
+  end
   
   resources :galleries do
     resources :images, only: [:create, :destroy, :show, :edit, :update]
@@ -11,7 +14,8 @@ Rails.application.routes.draw do
   
   resources :tags
   
-  resources :users, only: [:index, :show, :edit, :update, :destroy]
+  
+  resources :users, only: [:index, :show, :edit, :update, :destroy, :create]
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

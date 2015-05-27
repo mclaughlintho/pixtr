@@ -3,9 +3,29 @@
 <div>
   <ul>
     <% @images.each do |image| %>
+    <% unless image.gallery.private? && image.user != current_user %>
     <li>
-      <%= image_tag image.url %> Go to this photos <%= link_to 'Gallery', image.gallery %>
+      <%= link_to image_tag(image.url), [image.gallery, image] %> Go to this photos <%= link_to 'Gallery', image.gallery %>
     </li>
+    <% if image.comments.any? %>
+      <h3><%= link_to pluralize(image.comments.count, "Comment"), [image.gallery, image] %></h3>
+    <% end %>
+    
+    <% if image.liking_users.any? %>
+      <h3><%= link_to pluralize(image.liking_users.count, "Like"), [image.gallery, image] %></h3>
+    <% end %>
+    
+    <% if image.tags.any? %>
+    <h3>Tags:</h3>
+    <ul>
+      <% image.tags.each do |tag| %>
+      <li>
+        <%= link_to tag.text, tag %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+    <% end %>
     <% end %>
   </ul>
 </div>

@@ -1,5 +1,10 @@
+<% if @gallery.private? %>
+<h1>PRIVATE</h1>
+<% end %>
+
 <h1><%= @gallery.name %></h1>
 <h3><%= @gallery.description %></h3>
+<h2><%= link_to @user.username, @user %></h2>
 <p><%= link_to 'Update Gallery seetings', edit_gallery_path(@gallery) %></p>
 <div>
   <%= render 'images/fields' %>
@@ -12,6 +17,26 @@
       <%= link_to image_tag(image.url), [@gallery, image] %>
       <%= link_to 'Delete image', [@gallery, image], method: :delete %>
     </li>
+    
+    <% if image.comments.any? %>
+      <h3><%= link_to pluralize(image.comments.count, "Comment"), [@gallery, image] %></h3>
     <% end %>
+    
+    <% if image.liking_users.any? %>
+      <h3><%= link_to pluralize(image.liking_users.count, "Like"), [@gallery, image] %></h3>
+    <% end %>
+    
+    <% if image.tags.any? %>
+    <h3>Tags:</h3>
+    <ul>
+      <% image.tags.each do |tag| %>
+      <li>
+        <%= link_to tag.text, tag %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+    <% end %>
+    
   </ul>
 </div>
