@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_login
+  before_action :require_owner, only: [:destroy]
   
   def create
     @image = Image.find(params[:image_id])
@@ -18,6 +19,13 @@ class CommentsController < ApplicationController
   
   def comment_params
     params.require(:comment).permit(:text).merge(user_id: current_user.id)
+  end
+  
+  def require_owner
+    comment = Comment.find(params[:id])
+    if comment.user != current_user
+      redirect_to root_url
+    end
   end
   
 end
